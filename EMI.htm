@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>EMI</title>
+<style>
+	body { margin: 0; padding: 0; box-sizing: border-box; background: #2e2e2e; color: #fff;}
+	section { text-align: center;width: 80%; margin: auto;}
+	table { text-align:center; width: 100%; margin: 2rem auto;}
+	h6 {color: orange;}
+	button {
+	background: rgba(0,250, 0, 0.8);
+	color: #fff;
+	padding: 10px 20px;
+	font-size: 1.2rem;
+	border: none;
+	outline: none;
+	margin-top: 3rem;
+}
+
+
+</style>
+	</head>
+<body>
+<section>
+	<h6>Equated Monthly Installment</h6>
+<h1>EMI: <span id="myEMI"></span></h1>
+
+<h4>
+<table border="0">
+<tr><td>Principle Amount: </td><td><input type="number" id="principle"/></td></tr>
+<tr><td>Rate p.a (%): </td><td><input type="number" id="rate"/></td></tr>
+<tr><td>Tenure: </td><td><input type="number" id="tenure"/></td></tr>
+<tr><td colspan="2">
+<button type="button" id="cal-emi-btn" >Calculate EMI</button>
+</td></tr>
+</table>
+</h4>
+</section>
+<script>
+	document.getElementById('cal-emi-btn').addEventListener('click', calculateEMI);
+	const principle = document.getElementById('principle');
+	const rate = document.getElementById('rate');
+	const tenure = document.getElementById('tenure');
+	
+ 	function calculateEMI() {
+		let p=parseInt(principle.value), t=parseInt(tenure.value),  r=parseInt(rate.value);
+	
+	//per month interest rate
+	r=r/(100*12);
+	n=t*12;
+
+	var emi = p*r*(Math.pow((r+1),n))/((Math.pow((r+1),n))-1);
+	console.log(emi);
+	document.querySelector('#myEMI').innerHTML = emi.toString();
+	}
+ </script>
+</body>
+</html>
