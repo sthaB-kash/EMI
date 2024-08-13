@@ -31,7 +31,7 @@
 <table border="0">
 <tr><td>Principle Amount: </td><td><input type="number" id="principle"/></td></tr>
 <tr><td>Rate p.a (%): </td><td><input type="number" id="rate"/></td></tr>
-<tr><td>Tenure: </td><td><input type="number" id="tenure"/></td></tr>
+<tr><td>Tenure(month): </td><td><input type="number" id="tenure"/></td></tr>
 <tr><td colspan="2">
 <button type="button" id="cal-emi-btn" >Calculate EMI</button>
 </td></tr>
@@ -45,15 +45,16 @@
 	const tenure = document.getElementById('tenure');
 	
  	function calculateEMI() {
+		
 		let p=Number.parseFloat(principle.value), t=parseInt(tenure.value),  r=Number.parseFloat(rate.value);
 	
-	//per month interest rate
-	r=r/(100*12);
-	n=t*12;
-
-	var emi = p*r*(Math.pow((r+1),n))/((Math.pow((r+1),n))-1);
-	console.log(emi);
-	document.querySelector('#myEMI').innerHTML = emi.toString();
+		//per month interest rate
+		r=r/(100*12);
+		n=t;
+	
+		var emi = p*r*(Math.pow((r+1),n))/((Math.pow((r+1),n))-1);
+		console.log(emi);
+		document.querySelector('#myEMI').innerHTML = emi.toString();
 	}
  </script>
 </body>
