@@ -45,7 +45,7 @@
 	const tenure = document.getElementById('tenure');
 	
  	function calculateEMI() {
-		let p=parseInt(principle.value), t=parseInt(tenure.value),  r=parseInt(rate.value);
+		let p=Number.parseFloat(principle.value), t=parseInt(tenure.value),  r=Number.parseFloat(rate.value);
 	
 	//per month interest rate
 	r=r/(100*12);
