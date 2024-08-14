@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import EMITable from "./EMITable";
+import EmiList from "./components/emi/EmiList";
 
 function App() {
   const [principle, setPrinciple] = useState();
@@ -98,7 +98,7 @@ function App() {
         EMI: <span>{emi}</span>
       </h1>
 
-      {showEmiList && <EMITable p={principle} r={rate} t={tenure} />}
+      {showEmiList && <EmiList p={principle} r={rate} t={tenure} />}
     </>
   );
 }
