@@ -1,11 +1,14 @@
 import "./App.css";
 import { useState } from "react";
+import EMITable from "./EMITable";
 
 function App() {
   const [principle, setPrinciple] = useState();
   const [rate, setRate] = useState();
   const [year, setYear] = useState();
   const [month, setMonth] = useState();
+  const [tenure, setTenure] = useState();
+  const [showEmiList, setShowEmiList] = useState(false);
 
   const [emi, setEmi] = useState();
 
@@ -33,6 +36,8 @@ function App() {
     let emi = (p * r * Math.pow(r + 1, n)) / (Math.pow(r + 1, n) - 1);
     console.log("EMI", emi);
     setEmi(emi.toFixed(2));
+    setTenure(n);
+    setShowEmiList(true);
   };
 
   return (
@@ -92,6 +97,8 @@ function App() {
       <h1 className="text-2xl font-bold text-center mt-3">
         EMI: <span>{emi}</span>
       </h1>
+
+      {showEmiList && <EMITable p={principle} r={rate} t={tenure} />}
     </>
   );
 }
