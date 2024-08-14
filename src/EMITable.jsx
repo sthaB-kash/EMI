@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { ADToBS, BSToAD } from "bikram-sambat-js";
 
 // eslint-disable-next-line react/prop-types
-const EMITable = ({ p, t, r }) => {
-  const [date, setDate] = useState();
+const EMITable = ({ p, t, r, list = false }) => {
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [bsDate, setBsDate] = useState();
   const [emiList, setEmiList] = useState([]);
 
   const handleChange = (e) => {
@@ -16,7 +17,7 @@ const EMITable = ({ p, t, r }) => {
   const calculateEmi = () => {
     let data = [];
     const emi = {
-      dateAD: date,
+      dateAD: new Date(date).toDateString(),
       dateBS: ADToBS(date),
       days: 0,
       amtReceived: 0,
@@ -33,7 +34,7 @@ const EMITable = ({ p, t, r }) => {
       let principleAmtPerMonth = Number(p / t);
       let days = countDays(new Date(prevDate), new Date(d));
       data.push({
-        dateAD: d,
+        dateAD: new Date(d).toDateString(),
         dateBS: ADToBS(d),
         days: days,
         amtReceived: 0,
@@ -72,13 +73,45 @@ const EMITable = ({ p, t, r }) => {
   };
 
   useEffect(() => {
-    if (date !== undefined) calculateEmi();
+    if (date !== undefined) {
+      setBsDate(ADToBS(date));
+      calculateEmi();
+    }
   }, [date]);
+
+  const convertToAD = () => {
+    console.log("bs date", bsDate);
+    setDate(BSToAD(bsDate));
+  };
 
   return (
     <section>
       <div>
-        <input type="date" name="date" onChange={handleChange} value={date} />
+        <h5 className="font-bold">Select Date</h5>
+        <div className="text-xl mt-2">
+          <label htmlFor="dateAd">AD: </label>
+          <input
+            id="dateAd"
+            type="date"
+            name="date"
+            onChange={handleChange}
+            value={date}
+            className="p-1"
+          />
+        </div>
+        <div className="text-xl mt-2">
+          <label htmlFor="dateBs">BS: </label>
+          <input
+            id="dateBs"
+            type="text"
+            value={bsDate}
+            className="p-1 w-[130px]"
+            onChange={(e) => setBsDate(e.target.value)}
+          />
+          <button onClick={convertToAD} className="p-1 m-1">
+            Convert
+          </button>
+        </div>
       </div>
       <table className="table-auto w-full border border-slate-500 mt-14">
         <thead className="bg-indigo-800">
@@ -87,11 +120,13 @@ const EMITable = ({ p, t, r }) => {
             <th className="border border-slate-500 ">Date AD</th>
             <th className="border border-slate-500 ">Date BS</th>
             <th className="border border-slate-500 ">Days</th>
-            <th className="border border-slate-500 ">Amount Received</th>
+            {list && (
+              <th className="border border-slate-500 ">Amount Received</th>
+            )}
             <th className="border border-slate-500 ">Interest</th>
             <th className="border border-slate-500 ">Principle</th>
             <th className="border border-slate-500 ">Rem. Bal.</th>
-            <th className="border border-slate-500 ">Interest Due</th>
+            {list && <th className="border border-slate-500 ">Interest Due</th>}
           </tr>
         </thead>
         <tbody className="text-center">
@@ -101,7 +136,9 @@ const EMITable = ({ p, t, r }) => {
               <td className="border-slate-500 border">{emi.dateAD}</td>
               <td className="border-slate-500 border">{emi.dateBS}</td>
               <td className="border-slate-500 border">{emi.days}</td>
-              <td className="border-slate-500 border">{emi.amtReceived}</td>
+              {list && (
+                <td className="border-slate-500 border">{emi.amtReceived}</td>
+              )}
               <td className="border-slate-500 border">
                 {Number(emi.interest).toFixed(2)}
               </td>
@@ -111,9 +148,11 @@ const EMITable = ({ p, t, r }) => {
               <td className="border-slate-500 border">
                 {Number(emi.remBalance).toFixed(2)}
               </td>
-              <td className="border-slate-500 border">
-                {Number(emi.interestDue).toFixed(2)}
-              </td>
+              {list && (
+                <td className="border-slate-500 border">
+                  {Number(emi.interestDue).toFixed(2)}
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
