@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ADToBS, BSToAD } from "bikram-sambat-js";
 
 // eslint-disable-next-line react/prop-types
 const EMITable = ({ p, t, r }) => {
@@ -16,7 +17,7 @@ const EMITable = ({ p, t, r }) => {
     let data = [];
     const emi = {
       dateAD: date,
-      dateBS: "",
+      dateBS: ADToBS(date),
       days: 0,
       amtReceived: 0,
       interest: 0,
@@ -33,7 +34,7 @@ const EMITable = ({ p, t, r }) => {
       let days = countDays(new Date(prevDate), new Date(d));
       data.push({
         dateAD: d,
-        dateBS: "",
+        dateBS: ADToBS(d),
         days: days,
         amtReceived: 0,
         interest: ((data[index].remBalance * r) / 365) * days,
