@@ -3,7 +3,7 @@ import { ADToBS, BSToAD } from "bikram-sambat-js";
 import EMITable from "./Table";
 
 // eslint-disable-next-line react/prop-types
-const EmiList = ({ p, t, r, list = false }) => {
+const EmiList = ({ p, t, r}) => {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [bsDate, setBsDate] = useState();
   const [emiList, setEmiList] = useState([]);

@@ -1,6 +1,8 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import EmiList from "./components/emi/EmiList";
+import { EmiContext } from "./components/emi/emiContext";
+import InterestPerDay from "./components/emi/InterestPerDay";
 
 function App() {
   const [principle, setPrinciple] = useState();
@@ -9,8 +11,11 @@ function App() {
   const [month, setMonth] = useState();
   const [tenure, setTenure] = useState();
   const [showEmiList, setShowEmiList] = useState(false);
+  const [showPerDayInterest, setShowPerDayInterest] = useState(false);
 
   const [emi, setEmi] = useState();
+
+  const { data, setData } = useContext(EmiContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +27,6 @@ function App() {
   };
 
   const calculateEMI = (data) => {
-    console.log(data.principle, data.rate, data.year, data.month);
     let p = Number(data.principle); //Number.parseFloat(principle);
     let r = Number(data.rate) / (100 * 12); // calculate per month for EMI
     let y = Number(data.year);
@@ -37,6 +41,7 @@ function App() {
     console.log("EMI", emi);
     setEmi(emi.toFixed(2));
     setTenure(n);
+    setData({ principle: p, rate, tenure: n });
     setShowEmiList(true);
   };
 
@@ -99,6 +104,18 @@ function App() {
       </h1>
 
       {showEmiList && <EmiList p={principle} r={rate} t={tenure} />}
+      <div className="my-4">
+        <span className="text-lg font-semibold mr-3">
+          Per Day Interest Calculation
+        </span>
+        <button
+          className="px-2 py-1"
+          onClick={() => setShowPerDayInterest(!showPerDayInterest)}
+        >
+          {showPerDayInterest ? "Hide" : "Show"}
+        </button>
+      </div>
+      {showPerDayInterest && <InterestPerDay />}
     </>
   );
 }
