@@ -30,16 +30,18 @@ const EMITable = ({ p, t, r }) => {
     const dateRange = getDateRange();
     dateRange.forEach((d, index) => {
       let prevDate = index === 0 ? date : dateRange[index - 1];
-      let principleAmtPerMonth = Number(p / t).toFixed(2);
+      let principleAmtPerMonth = Number(p / t);
       let days = countDays(new Date(prevDate), new Date(d));
       data.push({
         dateAD: d,
         dateBS: ADToBS(d),
         days: days,
         amtReceived: 0,
-        interest: ((data[index].remBalance * r) / 365) * days,
+        interest: ((data[index].remBalance * r) / 100 / 365) * days,
         principle: principleAmtPerMonth,
-        remBalance: Number(p - principleAmtPerMonth).toFixed(2),
+        remBalance: Number(
+          data[index].remBalance - principleAmtPerMonth
+        ).toFixed(2),
         interestDue: 0,
       });
     });
