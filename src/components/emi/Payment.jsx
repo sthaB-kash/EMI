@@ -37,33 +37,38 @@ const Payment = () => {
   };
 
   return (
-    <div className="mt-96 border rounded">
-      <h2 className="text-xl mt-4">Payment</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="paymentDate">Enter Date: </label>
-          <input
-            type="text"
-            value={date}
-            id="paymentDate"
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="amount">Enter Amount: </label>
-          <input
-            type="number"
-            step=".01"
-            value={amount}
-            id="amount"
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit">Save</button>
-        </div>
-      </form>
-
+    <div className="mt-10">
+      <div className="border rounded px-4 pb-4">
+        <h2 className="text-xl mt-4 font-bold">Payment</h2>
+        <form onSubmit={handleSubmit} className="w-fit">
+          <div className="flex justify-between mb-2">
+            <label htmlFor="paymentDate">Enter Date: </label>
+            <input
+              type="text"
+              value={date}
+              id="paymentDate"
+              className="p-1 rounded"
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-between">
+            <label htmlFor="amount">Enter Amount: &nbsp;</label>
+            <input
+              type="number"
+              step=".01"
+              value={amount}
+              id="amount"
+              className="p-1 rounded"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+          <div>
+            <button type="submit" className="px-5 py-1 font-medium">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
       <Table list={false} data={emiData} />
     </div>
   );

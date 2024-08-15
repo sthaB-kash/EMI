@@ -51,13 +51,13 @@ function App() {
       <h1 className="text-3xl font-bold text-center">
         Equated Monthly Installment
       </h1>
-      <form className="mt-6 w-1/3 mx-auto" onSubmit={handleSubmit}>
+      <form className="mt-6 mx-auto w-fit" onSubmit={handleSubmit}>
         <div className="pb-2 flex justify-between items-center gap-2">
           <label>Principle Amount:</label>
           <input
             type="number"
             name="principle"
-            className=""
+            className="rounded p-1"
             value={principle}
             onChange={(e) => setPrinciple(e.target.value)}
           />
@@ -67,30 +67,34 @@ function App() {
           <input
             type="number"
             name="rate"
-            className=""
+            className="rounded p-1"
             value={rate}
             onChange={(e) => setRate(e.target.value)}
           />
         </div>
         <div className="pb-2 flex justify-between items-center gap-2">
-          <label>Tenure:</label>
-          <div className="flex gap-2">
-            <input
-              type="number"
-              name="year"
-              className="w-[100px]"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            />
-            <label>Year(s)</label>
-            <input
-              type="number"
-              name="month"
-              className="w-[100px]"
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
-            />
-            <label>Month(s)</label>
+          <label className="self-start">Tenure:</label>
+          <div className="flex gap-2 gap-x-4 flex-col">
+            <div className="flex justify-between grow-1">
+              <label>Year(s)</label>
+              <input
+                type="number"
+                name="year"
+                className="w-[100px] rounded p-1"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Month(s)</label>
+              <input
+                type="number"
+                name="month"
+                className="w-[100px] rounded p-1"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+              />
+            </div>
           </div>
         </div>
         <div className="flex justify-end items-end mt-2">

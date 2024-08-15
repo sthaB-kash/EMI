@@ -89,7 +89,7 @@ const EmiList = ({ p, t, r}) => {
     <section>
       <div>
         <h5 className="font-bold">Select Date</h5>
-        <div className="text-xl mt-2">
+        <div className="text-lg mt-2">
           <label htmlFor="dateAd">AD: </label>
           <input
             id="dateAd"
@@ -97,19 +97,19 @@ const EmiList = ({ p, t, r}) => {
             name="date"
             onChange={handleChange}
             value={date}
-            className="p-1"
+            className="rounded p-1"
           />
         </div>
-        <div className="text-xl mt-2">
+        <div className="text-lg mt-2">
           <label htmlFor="dateBs">BS: </label>
           <input
             id="dateBs"
             type="text"
             value={bsDate}
-            className="p-1 w-[130px]"
+            className="rounded p-1 w-[130px]"
             onChange={(e) => setBsDate(e.target.value)}
           />
-          <button onClick={convertToAD} className="p-1 m-1">
+          <button onClick={convertToAD} className="p-1 m-1 text-md">
             Convert
           </button>
         </div>

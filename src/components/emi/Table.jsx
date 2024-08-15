@@ -2,9 +2,9 @@
 
 const Table = ({ list = true, data }) => {
   return (
-    <div>
+    <div className="overflow-scroll">
       <table className="table-auto w-full border border-slate-500 mt-14">
-        <thead className="bg-indigo-800">
+        <thead className="bg-indigo-800 whitespace-nowrap wrap">
           <tr>
             <th className="border border-slate-500 ">SN</th>
             <th className="border border-slate-500 ">Date AD</th>
