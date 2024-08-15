@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import EmiList from "./components/emi/EmiList";
 import { EmiContext } from "./components/emi/emiContext";
 import InterestPerDay from "./components/emi/InterestPerDay";
+import Payment from "./components/emi/Payment";
 
 function App() {
   const [principle, setPrinciple] = useState();
@@ -15,7 +16,7 @@ function App() {
 
   const [emi, setEmi] = useState();
 
-  const { data, setData } = useContext(EmiContext);
+  const { setLoanDetails } = useContext(EmiContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +42,7 @@ function App() {
     console.log("EMI", emi);
     setEmi(emi.toFixed(2));
     setTenure(n);
-    setData({ principle: p, rate, tenure: n });
+    setLoanDetails({ principle: p, rate, tenure: n });
     setShowEmiList(true);
   };
 
@@ -116,6 +117,8 @@ function App() {
         </button>
       </div>
       {showPerDayInterest && <InterestPerDay />}
+
+      <Payment />
     </>
   );
 }

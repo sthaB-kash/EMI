@@ -6,13 +6,14 @@ const initialData = {
   principle: 0,
   rate: 0,
   tenure: 0,
+  date: null,
 };
 
 // eslint-disable-next-line react/prop-types
 const EmiContextProvider = ({ children }) => {
-  const [data, setData] = useState(initialData);
+  const [loanDetails, setLoanDetails] = useState(initialData);
   return (
-    <EmiContext.Provider value={{ data, setData }}>
+    <EmiContext.Provider value={{ loanDetails, setLoanDetails }}>
       {children}
     </EmiContext.Provider>
   );
