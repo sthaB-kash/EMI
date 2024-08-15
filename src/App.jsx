@@ -103,7 +103,7 @@ function App() {
           </div>
         </div>
         <div className="flex justify-end items-end mt-2">
-          <button type="submit" className="btn">
+          <button type="submit" className="focus:outline-none">
             Calculate EMI
           </button>
         </div>

@@ -62,8 +62,8 @@ const Payment = () => {
               onChange={(e) => setAmount(e.target.value)}
             />
           </div>
-          <div>
-            <button type="submit" className="px-5 py-1 font-medium">
+          <div className="flex justify-end mt-2">
+            <button type="submit" className="px-5 py-1 font-medium focus:outline-none">
               Save
             </button>
           </div>
