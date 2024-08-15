@@ -23,6 +23,10 @@ function App() {
     // console.log(e.target[0].value);
     let formData = new FormData(e.target);
     let data = Object.fromEntries(formData.entries());
+
+    // Ask for input if all inputs are not provided
+    if (Object.values(data).some((val) => val.length === 0))
+      alert("Please provide all details.");
     console.log(data);
     calculateEMI(data);
   };
@@ -82,6 +86,7 @@ function App() {
                 name="year"
                 className="w-[100px] rounded p-1 text-end pr-2"
                 value={year}
+                defaultValue={0}
                 onChange={(e) => setYear(e.target.value)}
               />
             </div>
