@@ -47,7 +47,7 @@ function App() {
   };
 
   return (
-    <>
+    <section className="container mx-auto">
       <h1 className="text-3xl font-bold text-center">
         Equated Monthly Installment
       </h1>
@@ -123,7 +123,7 @@ function App() {
       {showPerDayInterest && <InterestPerDay />}
 
       <Payment />
-    </>
+    </section>
   );
 }
 
