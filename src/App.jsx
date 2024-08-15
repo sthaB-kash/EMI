@@ -57,7 +57,7 @@ function App() {
           <input
             type="number"
             name="principle"
-            className="rounded p-1"
+            className="rounded p-1 text-end pr-2"
             value={principle}
             onChange={(e) => setPrinciple(e.target.value)}
           />
@@ -67,7 +67,7 @@ function App() {
           <input
             type="number"
             name="rate"
-            className="rounded p-1"
+            className="rounded p-1 text-end pr-2"
             value={rate}
             onChange={(e) => setRate(e.target.value)}
           />
@@ -80,7 +80,7 @@ function App() {
               <input
                 type="number"
                 name="year"
-                className="w-[100px] rounded p-1"
+                className="w-[100px] rounded p-1 text-end pr-2"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
               />
@@ -90,7 +90,7 @@ function App() {
               <input
                 type="number"
                 name="month"
-                className="w-[100px] rounded p-1"
+                className="w-[100px] rounded p-1 text-end pr-2"
                 value={month}
                 onChange={(e) => setMonth(e.target.value)}
               />

@@ -47,7 +47,7 @@ const Payment = () => {
               type="text"
               value={date}
               id="paymentDate"
-              className="p-1 rounded"
+              className="p-1 rounded text-end pr-2"
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
@@ -58,7 +58,7 @@ const Payment = () => {
               step=".01"
               value={amount}
               id="amount"
-              className="p-1 rounded"
+              className="p-1 rounded text-end pr-2"
               onChange={(e) => setAmount(e.target.value)}
             />
           </div>
