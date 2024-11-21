@@ -14,9 +14,26 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
-    date !== null &&
+    if (emiData.length > 0) setEmiData[0].remBalance = loanDetails.principle;
+  }, [loanDetails]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payment = { date, amount };
+    console.log(payment);
+  };
+
+  const initialEntryHandler = () => {
+    console.log(loanDetails);
+    console.log(Object.values(loanDetails).filter((val) => val !== null));
+    if (
+      Object.values(loanDetails)
+        .filter((val) => val !== null)
+        .some((val) => val <= 0)
+    )
+      alert("Please provide loan details.");
+    else
       setEmiData([
-        ...emiData,
         {
           dateAD: new Date(BSToAD(date)).toDateString(),
           dateBS: date,
@@ -28,12 +45,6 @@ const Payment = () => {
           interestDue: 0,
         },
       ]);
-  }, [date, loanDetails]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const payment = { date, amount };
-    console.log(payment);
   };
 
   return (
@@ -63,13 +74,24 @@ const Payment = () => {
             />
           </div>
           <div className="flex justify-end mt-2">
-            <button type="submit" className="px-5 py-1 font-medium focus:outline-none">
+            <button
+              type="submit"
+              className="px-5 py-1 font-medium focus:outline-none"
+            >
               Save
             </button>
           </div>
         </form>
       </div>
-      <Table list={false} data={emiData} />
+      {emiData.length === 0 ? (
+        <div className="flex justify-end mt-4">
+          <button onClick={initialEntryHandler} className="px-3 py-2">
+            Initial Entry
+          </button>
+        </div>
+      ) : (
+        <Table list={false} data={emiData} />
+      )}
     </div>
   );
 };
